@@ -1,0 +1,30 @@
+@import "./base-vars";
+
+@mobile-breakpoint: 576px;
+@layout-breakpoint-s: 768px;
+@layout-breakpoint-m: 992px;
+@layout-breakpoint-l: 1200px;
+
+.mobile(@rules) {
+    @media (max-width: @mobile-breakpoint) { @rules(); }
+}
+
+.mobileLandscape(@rules) {
+    @media screen and (orientation:landscape) and (max-height: @mobile-breakpoint) { @rules(); }
+}
+
+.desktop(@rules) {
+    @media (min-width: @mobile-breakpoint) { @rules(); }
+}
+
+.layout-s(@rules) {
+    @media (max-width: @layout-breakpoint-s) { @rules(); }
+}
+
+.layout-m(@rules) {
+    @media (max-width: @layout-breakpoint-m) { @rules(); }
+}
+
+.layout-l(@rules) {
+    @media (max-width: @layout-breakpoint-l) { @rules(); }
+}

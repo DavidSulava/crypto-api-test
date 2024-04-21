@@ -1,0 +1,33 @@
+@import (reference) "../main";
+
+.table-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  padding: @padding-lg;
+  border-radius: @border-radius-base;
+  background: #eef0f0;
+
+  & > div {
+    flex: 1;
+  }
+
+  .mobile({
+    gap: 30px;
+    padding: 0;
+    background: none;
+  });
+}
+
+.v-data-table-column--align-hide-on-mobile {
+  .mobile({
+    display: none;
+  })
+}
+.v-table__wrapper {
+  height: calc(100vh - (@header-height + (40px * 2) + 32px + 35px + @padding-base * 2 + @padding-lg * 2 + 50px ))!important;
+
+  .mobile({
+    height: calc(100vh/2 - (@header-height + 32px + 35px + 50px))!important;
+  });
+}
