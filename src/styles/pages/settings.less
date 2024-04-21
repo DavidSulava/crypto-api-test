@@ -1,0 +1,14 @@
+@import (reference) "../main";
+
+.currency-price-wrapper {
+  height: 64px;
+  margin: 20px 0;
+}
+
+.settings-page-wrapper .v-table__wrapper {
+  height: calc(100vh - (@header-height + (@padding-base * 2) + 60px  + 30px + 35px + 62px + (@padding-base * 2) + 30px * 2 + 20px * 2 ))!important;
+
+  .mobile({
+    height: calc(100vh - (@header-height + @header-height + 32px + 35px + 64px + 150px))!important;
+  });
+}

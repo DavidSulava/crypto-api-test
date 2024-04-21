@@ -4,7 +4,7 @@
   import {SELECTED_PROPS} from "@/components/CurrencyPairSelect/constants.js";
   import {useCurrencyPairStore} from "@/stores/currencyPair/index.js";
   import {useBookOrderStore} from "@/stores/bookOrder/index.js";
-  import BookTable from "./BookTable/index.vue";
+  import BookTable from "@/components/BookTable/index.vue";
 
   const bookOrderStore = useBookOrderStore();
 
@@ -54,7 +54,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="book-order-wrapper">
     <h3>
       {{ computedSelectedCurrencyPair.title }}
     </h3>

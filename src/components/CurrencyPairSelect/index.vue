@@ -58,7 +58,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="fill-height">
     <v-select
         v-model="selectedValue"
         label="Select"
@@ -66,15 +66,14 @@
         :item-props="true"
         :items="SELECTED_PROPS"
         :disabled="isDisabled"
+        hide-details
         @update:modelValue="onSelectChange"
     />
 
     <CurrencyPrice
-      class="my-5"
       :is-loading="currencyPairStore.isDataFetching"
       :price-data="currencyPairStore.price"
     />
-
     <br />
     <CurrencyPairHistory :selected-data="selectedPair" />
   </div>

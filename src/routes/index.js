@@ -4,15 +4,15 @@ import {
     createWebHistory,
 } from "vue-router";
 
-const CurrencyPair = () => import("@/pages/CurrencyPair/index.vue");
-const BookOrder = () => import("@/pages/BookOrder/index.vue");
+const SettingPade = () => import("@/pages/Settings/index.vue");
+const BookOrderPage = () => import("@/pages/BookOrder/index.vue");
 const NotFoundComponent = () => import("@/pages/NotFound/index.vue");
 
 const routes = [
     {
         path: '/',
-        name: 'CurrencyPair',
-        component: CurrencyPair,
+        name: 'Settings',
+        component: SettingPade,
         meta: {
             title: 'Settings',
             isAuthRequired: false,
@@ -21,8 +21,8 @@ const routes = [
     },
     {
         path: '/book-correctly',
-        name: 'BookCorrectly',
-        component: BookOrder,
+        name: 'BookCurrency',
+        component: BookOrderPage,
         meta: {
             title: 'Book-Order',
             isAuthRequired: false,

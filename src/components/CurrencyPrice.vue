@@ -10,14 +10,14 @@
 </script>
 
 <template>
-  <div>
+  <div class="currency-price-wrapper">
     <v-skeleton-loader
         v-if="isLoading"
         type="list-item-avatar"
     >
     </v-skeleton-loader>
-    <template v-else>
+    <div v-else class="full-height">
       {{ priceData?.symbol }} - {{ priceData?.price }}
-    </template>
+    </div>
   </div>
 </template>

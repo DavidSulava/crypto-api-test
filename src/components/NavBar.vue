@@ -5,25 +5,23 @@
 </script>
 
 <template>
-  <v-container>
-    <v-app-bar
+  <v-app-bar
       app
       color="teal-darken-1"
-    >
-      <template v-slot:prepend>
-        <v-icon >mdi-currency-eur</v-icon>
-      </template>
+  >
+    <template v-slot:prepend>
+      <v-icon >mdi-currency-eur</v-icon>
+    </template>
 
-      <v-btn
-          v-for="link in allowedLinks"
-          :key="link.name"
-          router :to="link.path"
-          :exact="true"
-      >
+    <v-btn
+        v-for="link in allowedLinks"
+        :key="link.name"
+        router :to="link.path"
+        :exact="true"
+    >
             <span>
               {{ link.meta?.title || link.name }}
             </span>
-      </v-btn>
-    </v-app-bar>
-  </v-container>
+    </v-btn>
+  </v-app-bar>
 </template>

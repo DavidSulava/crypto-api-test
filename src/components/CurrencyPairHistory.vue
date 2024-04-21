@@ -27,14 +27,16 @@
 </script>
 
 <template>
-  <div v-if="currencyPairStore.history.length">
+  <div
+      v-if="currencyPairStore.history.length"
+      class="currency-history-wrapper"
+  >
     <div>History</div>
     <br>
     <v-data-table-virtual
         v-model:sort-by="tableOptions.sortBy"
         :headers="tableOptions.headers"
         :items="currencyPairStore.history"
-        height="500px"
         fixed-header
     >
       <template #item="{ item }">
