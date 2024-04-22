@@ -6,13 +6,6 @@
   import {SELECTED_PROPS} from "@/components/CurrencyPairSelect/constants.js";
   import {useWebSocket} from "@vueuse/core";
 
-  defineProps({
-    isDisabled: {
-      type: Boolean,
-      default: false,
-    },
-  })
-
   const currencyPairStore = useCurrencyPairStore();
 
   const selectedValue = ref(currencyPairStore.selectedPairValue || SELECTED_PROPS[0].value);
@@ -67,7 +60,6 @@
         variant="outlined"
         :item-props="true"
         :items="SELECTED_PROPS"
-        :disabled="isDisabled"
         hide-details
         @update:modelValue="onSelectChange"
     />
