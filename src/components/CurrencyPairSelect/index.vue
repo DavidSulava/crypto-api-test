@@ -17,7 +17,7 @@
 
   const selectedValue = ref(currencyPairStore.selectedPairValue || SELECTED_PROPS[0].value);
   const selectedPair = ref(null);
-  const { data, open, close } = useBookWS(selectedValue, 10);
+  const { data, open, close } = useTradeWS(selectedValue, 10);
 
   onMounted(() => {
     currencyPairStore.getPair(selectedValue.value);
@@ -49,7 +49,7 @@
       open();
     }
   }
-  function useBookWS(selectedValue, depth = 10) {
+  function useTradeWS(selectedValue, depth = 10) {
     const connectionUrl = computed(() => `wss://stream.binance.com:9443/ws/${selectedValue.value.toLowerCase()}@trade`);
     const { data, open, close } = useWebSocket(connectionUrl);
 
