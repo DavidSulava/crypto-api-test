@@ -1,7 +1,7 @@
 <script setup>
   import '@/styles/pages/book-order.less';
   import {onMounted, ref, watch} from "vue";
-  import {SELECTED_PROPS} from "@/components/CurrencyPairSelect/constants.js";
+  import {SELECTED_PROPS} from "@/pages/Settings/CurrencyPairSelect/constants.js";
   import {useCurrencyPairStore} from "@/stores/currencyPair/index.js";
   import {useBookOrderStore} from "@/stores/bookOrder/index.js";
   import BookTable from "@/components/BookTable/index.vue";

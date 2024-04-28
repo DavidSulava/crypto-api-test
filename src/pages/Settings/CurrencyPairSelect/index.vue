@@ -3,7 +3,7 @@
   import {useCurrencyPairStore} from "@/stores/currencyPair/index.js";
   import CurrencyPairHistory from "@/components/CurrencyPairHistory.vue";
   import CurrencyPrice from "@/components/CurrencyPrice.vue";
-  import {SELECTED_PROPS} from "@/components/CurrencyPairSelect/constants.js";
+  import {SELECTED_PROPS} from "@/pages/Settings/CurrencyPairSelect/constants.js";
   import {useWebSocket} from "@vueuse/core";
 
   const currencyPairStore = useCurrencyPairStore();
@@ -15,17 +15,20 @@
   onMounted(() => {
     currencyPairStore.getPair(selectedValue.value);
   });
-
   watch(data, () => {
     if (data.value?.length) {
-      const result = JSON.parse(data.value);
-      currencyPairStore.setPrice({
-        ...currencyPairStore.price,
-        price: result.p
-      });
+      setPrice(data.value);
     }
   });
 
+  function setPrice(data) {
+    const result = JSON.parse(data);
+
+    currencyPairStore.setPrice({
+      ...currencyPairStore.price,
+      price: result.p
+    });
+  }
   function onSelectChange(value) {
     currencyPairStore.setSelectPair(value);
     selectedPair.value = {
@@ -34,6 +37,7 @@
     };
     currencyPairStore.getPair(value);
   }
+  //Local composable section
   function useTradeWS(selectedValue) {
     const connectionUrl = computed(() => `wss://stream.binance.com:9443/ws/${selectedValue.value.toLowerCase()}@trade`);
     const { data, open, close } = useWebSocket(connectionUrl);
@@ -54,6 +58,10 @@
 
 <template>
   <div class="fill-height">
+    <CurrencyPrice
+        :is-loading="currencyPairStore.isDataFetching"
+        :price-data="currencyPairStore.price"
+    />
     <v-select
         v-model="selectedValue"
         label="Select"
@@ -62,11 +70,6 @@
         :items="SELECTED_PROPS"
         hide-details
         @update:modelValue="onSelectChange"
-    />
-
-    <CurrencyPrice
-      :is-loading="currencyPairStore.isDataFetching"
-      :price-data="currencyPairStore.price"
     />
     <br />
     <CurrencyPairHistory :selected-data="selectedPair" />
