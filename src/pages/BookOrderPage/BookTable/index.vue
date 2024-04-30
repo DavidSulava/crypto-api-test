@@ -1,4 +1,6 @@
 <script setup>
+  import ColorPrice from "@/components/ColorNumber.vue";
+
   defineProps({
     items: Array,
     tableOptions: Object,
@@ -19,8 +21,6 @@
       :items="items"
       :loading="loading"
       :itemsPerPageOptions="tableOptions.limitList"
-      items-per-page-text-info="0"
-      items-per-page-text="per page"
   >
     <template #header.total="{column}">
           <span class="hide-on-mobile">
@@ -30,7 +30,12 @@
     <template #item="{ item }">
       <tr>
         <td>{{ parseFloat(item[0]).toFixed(2) }}</td>
-        <td>{{ parseFloat(item[1]).toFixed(2) }}</td>
+        <td>
+          <ColorPrice
+              :value="parseFloat(item[1]).toFixed(5)"
+              :key="item[0]"
+          />
+        </td>
         <td class="hide-on-mobile">{{ parseFloat(item[0]) * parseFloat(item[1]) }}</td>
       </tr>
     </template>

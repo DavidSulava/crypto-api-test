@@ -1,6 +1,6 @@
 <script setup>
   import '@/styles/pages/settings.less';
-  import CurrencyPairSelect from "@/pages/Settings/CurrencyPairSelect/index.vue";
+  import CurrencyPairSelect from "@/pages/SettingsPage/CurrencyPair/index.vue";
 </script>
 
 <template>

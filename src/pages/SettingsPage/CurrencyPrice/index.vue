@@ -1,5 +1,5 @@
 <script setup>
-import {ref, watch} from "vue";
+import ColorPrice from "@/components/ColorNumber.vue";
 
   const props = defineProps({
     priceData: {
@@ -11,14 +11,11 @@ import {ref, watch} from "vue";
     className: {
       type: String,
       default: 'currency-price-wrapper',
+    },
+    iconUrl: {
+      type: String,
     }
   });
-
-  const isRed = ref(false);
-
-  watch(() => props.priceData?.price, (newPrice, oldPrice)=>{
-    isRed.value = newPrice < oldPrice;
-  })
 </script>
 
 <template>
@@ -34,9 +31,20 @@ import {ref, watch} from "vue";
     </div>
     <span
         v-else
-        :class = "[isRed ? 'red-price' : 'green-price', 'price-row']"
+        class="d-flex"
     >
-      {{ priceData?.symbol }} - {{ priceData?.price }}
+      <v-img
+          v-if="iconUrl"
+          class="mr-2"
+          aspect-ratio="1"
+          :width="25"
+          :height="25"
+          :src='iconUrl'
+      />
+      <span v-else>
+        {{ priceData?.symbol }} -
+      </span>
+      <ColorPrice :value="priceData?.price"/>
     </span>
   </div>
 </template>

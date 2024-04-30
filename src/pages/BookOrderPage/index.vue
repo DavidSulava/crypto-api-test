@@ -1,15 +1,18 @@
 <script setup>
   import '@/styles/pages/book-order.less';
-  import {onMounted, ref, watch} from "vue";
-  import {SELECTED_PROPS} from "@/pages/Settings/CurrencyPairSelect/constants.js";
+  import {onMounted, onUnmounted, ref, watch} from "vue";
   import {useCurrencyPairStore} from "@/stores/currencyPair/index.js";
   import {useBookOrderStore} from "@/stores/bookOrder/index.js";
-  import BookTable from "@/components/BookTable/index.vue";
+  import BookTable from "@/pages/BookOrderPage/BookTable/index.vue";
+  import useBinanceWS from "@/composables/useBinanceWS.js";
 
   const bookOrderStore = useBookOrderStore();
 
   const selectedLimit = ref(100);
-  const { computedSelectedCurrencyPair, getBookOrder } = useGetSnapshot(selectedLimit);
+  const eventCount = ref(0);
+  const prev_u = ref(0);
+  const { selectedPair, getBookOrder } = useGetSnapshot(selectedLimit);
+  const { data } = useBinanceWS(selectedPair, '@depth');
   const tableOptions = ref({
     sortBy: [{ key: 'timeStamp', order:'desc'}],
     headers: [
@@ -29,11 +32,41 @@
       getBookOrder();
     }
   })
+  watch(data, () => {
+    if (data.value?.length) {
+      updateQuantity(data.value);
+    }
+  });
+  onUnmounted(() => {
+    bookOrderStore.setBookOrder([])
+  })
 
+  function updateQuantity(data) {
+    const result = JSON.parse(data);
+
+    if(//https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly
+        result.u > bookOrderStore.bookOrderList?.lastUpdateId
+        && prev_u.value && result.U ===  prev_u.value + 1
+    ) {
+      result.a.forEach(item => {
+        const quantity = parseFloat(item[1]);
+        if(quantity) {
+          bookOrderStore.updateBookOrder('asks', [parseFloat(item[0]), quantity]);
+        }
+      });
+      result.b.forEach(item => {
+        const quantity = parseInt(item[1]);
+        if(quantity) {
+          bookOrderStore.updateBookOrder('bids', [parseInt(item[0]), quantity]);
+        }
+      });
+    }
+    eventCount.value++;
+    prev_u.value = result.u;
+  }
+  //Local composable section
   function useGetSnapshot(limitRef) {
-    const {selectedPairValue} = useCurrencyPairStore();
-
-    const computedSelectedCurrencyPair = ref(SELECTED_PROPS.find(item => item.value === selectedPairValue) || SELECTED_PROPS[0]);
+    const {selectedPair} = useCurrencyPairStore();
 
     onMounted(() => {
       getBookOrder();
@@ -41,13 +74,13 @@
 
     function getBookOrder() {
       bookOrderStore.getBookOrder({
-        symbol: computedSelectedCurrencyPair.value.value,
+        symbol: selectedPair?.value,
         limit: limitRef.value,
       });
     }
 
     return {
-      computedSelectedCurrencyPair,
+      selectedPair,
       getBookOrder,
     }
   }
@@ -56,7 +89,7 @@
 <template>
   <div class="book-order-wrapper">
     <h3>
-      {{ computedSelectedCurrencyPair.title }}
+      {{ selectedPair.title }}
     </h3>
     <br>
     <div

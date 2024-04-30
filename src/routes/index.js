@@ -4,9 +4,9 @@ import {
     createWebHistory,
 } from "vue-router";
 
-const SettingPade = () => import("@/pages/Settings/index.vue");
-const BookOrderPage = () => import("@/pages/BookOrder/index.vue");
-const NotFoundComponent = () => import("@/pages/NotFound/index.vue");
+const SettingPade = () => import("@/pages/SettingsPage/index.vue");
+const BookOrderPage = () => import("@/pages/BookOrderPage/index.vue");
+const NotFoundPage = () => import("@/pages/NotFoundPage/index.vue");
 
 const routes = [
     {
@@ -31,7 +31,7 @@ const routes = [
     },
     {
         path: '/:catchAll(.*)',
-        component: NotFoundComponent
+        component: NotFoundPage
     }
 ]
 const router = createRouter({

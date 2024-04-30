@@ -1,16 +1,17 @@
 import {defineStore} from "pinia";
 import {useFetch} from "@vueuse/core";
+import {SELECTED_PROPS} from "@/pages/SettingsPage/CurrencyPair/constants.js";
 
 export const useCurrencyPairStore = defineStore('currencyPair', {
     state: () => ({
-        selectedPairValue: null,
+        selectedPair: structuredClone(SELECTED_PROPS[0]),
         price: undefined,
         isDataFetching: false,
         history: [],
     }),
     actions: {
-        setSelectPair(pair) {
-            this.selectedPairValue = pair;
+        setSelectPair(data) {
+            this.selectedPair = data;
         },
         setPrice(price) {
             this.price = price;

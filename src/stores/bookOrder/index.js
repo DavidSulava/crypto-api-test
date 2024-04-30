@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import {useFetch} from "@vueuse/core";
 
-export const useBookOrderStore = defineStore('BookOrder', {
+export const useBookOrderStore = defineStore('BookOrderPage', {
     state: () => ({
         bookOrderList: [],
         isBookDataFetching: false,
@@ -9,6 +9,28 @@ export const useBookOrderStore = defineStore('BookOrder', {
     actions: {
         setBookOrder(data) {
             this.bookOrderList = data;
+        },
+        updateBookOrder(key, [price, quantity]) {
+            // Here is implemented the binary search algorithm
+            let start = 0;
+            let end = this.bookOrderList[key]?.length - 1;
+
+            while(start <= end) {
+                let mid = Math.floor((start + end) / 2);
+
+                if(parseInt(this.bookOrderList[key][mid]?.[0]) === price) {
+                    if(!!quantity) {
+                        this.bookOrderList[key][mid][1] = quantity;
+                    }
+                    return this.bookOrderList[key][mid];
+                }
+
+                if(price < parseInt(this.bookOrderList[key][mid][0])) {
+                    end = mid - 1;
+                } else {
+                    start = mid + 1;
+                }
+            }
         },
         async getBookOrder({symbol, limit}) {
             try {
