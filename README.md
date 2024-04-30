@@ -1,7 +1,7 @@
 # Description
-SPA - Binance api test
+SPA - Binance api interaction
 
-You can see the demo 👉 [here](https://davidsulava.github.io/crypto-api-test/)
+Here is the demo 👉 [here](https://davidsulava.github.io/crypto-api-test/)
 
 ## Stack
 ```
