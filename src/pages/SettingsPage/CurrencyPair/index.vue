@@ -9,7 +9,7 @@
   const currencyPairStore = useCurrencyPairStore();
 
   const selectedPair = ref(null);
-  const selectedPairValue = computed(() => currencyPairStore.selectedPair.value);
+  const selectedPairValue = ref(currencyPairStore.selectedPair.value);
   const { data } = useBinanceWS(selectedPairValue);
 
   onMounted(() => {
