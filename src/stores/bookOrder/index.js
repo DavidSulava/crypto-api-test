@@ -18,14 +18,14 @@ export const useBookOrderStore = defineStore('BookOrderPage', {
             while(start <= end) {
                 let mid = Math.floor((start + end) / 2);
 
-                if(parseInt(this.bookOrderList[key][mid]?.[0]) === price) {
+                if(parseFloat(this.bookOrderList[key][mid]?.[0]) === price) {
                     if(!!quantity) {
                         this.bookOrderList[key][mid][1] = quantity;
                     }
                     return this.bookOrderList[key][mid];
                 }
 
-                if(price < parseInt(this.bookOrderList[key][mid][0])) {
+                if(price < parseFloat(this.bookOrderList[key][mid][0])) {
                     end = mid - 1;
                 } else {
                     start = mid + 1;
