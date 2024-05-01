@@ -29,7 +29,7 @@
     </template>
     <template #item="{ item }">
       <tr>
-        <td>{{ parseFloat(item[0]).toFixed(2) }}</td>
+        <td>{{ parseFloat(item[0]).toFixed(4) }}</td>
         <td>
           <ColorPrice
               :value="parseFloat(item[1]).toFixed(5)"
