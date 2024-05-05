@@ -11,16 +11,6 @@ const NotFoundPage = () => import("@/pages/NotFoundPage/index.vue");
 const routes = [
     {
         path: '/',
-        name: 'Settings',
-        component: SettingPade,
-        meta: {
-            title: 'Settings',
-            isAuthRequired: false,
-            isNavbar: true,
-        },
-    },
-    {
-        path: '/book-correctly',
         name: 'BookCurrency',
         component: BookOrderPage,
         meta: {
@@ -28,6 +18,16 @@ const routes = [
             isAuthRequired: false,
             isNavbar: true,
         }
+    },
+    {
+        path: '/settings',
+        name: 'Settings',
+        component: SettingPade,
+        meta: {
+            title: 'Settings',
+            isAuthRequired: false,
+            isNavbar: true,
+        },
     },
     {
         path: '/:catchAll(.*)',

@@ -4,7 +4,7 @@ import {SELECTED_PROPS} from "@/pages/SettingsPage/CurrencyPair/constants.js";
 
 export const useCurrencyPairStore = defineStore('currencyPair', {
     state: () => ({
-        selectedPair: structuredClone(SELECTED_PROPS[0]),
+        selectedPair: structuredClone(SELECTED_PROPS[2]),
         price: undefined,
         isDataFetching: false,
         history: [],
