@@ -1,5 +1,5 @@
 <script setup>
-  import router from "@/routes/index.js";
+  import router from '@/routes/index.js';
 
   const allowedLinks = router.options.routes.filter(route => !!route?.meta?.isNavbar);
 </script>
