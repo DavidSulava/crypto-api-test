@@ -1,5 +1,6 @@
-import {defineStore} from "pinia";
-import {useFetch} from "@vueuse/core";
+import {defineStore} from 'pinia';
+import {useFetch} from '@vueuse/core';
+import {BINANCE_API_URL} from '@/constants/api.js';
 
 export const useBookOrderStore = defineStore('BookOrderPage', {
     state: () => ({
@@ -35,7 +36,7 @@ export const useBookOrderStore = defineStore('BookOrderPage', {
         async getBookOrder({symbol, limit}) {
             try {
                 this.isBookDataFetching = true;
-                const url = `https://api.binance.com/api/v3/depth?symbol=${symbol}&limit=${limit}`
+                const url = `${BINANCE_API_URL}/depth?symbol=${symbol}&limit=${limit}`
 
                 const {data } = await useFetch(url).get().json();
                 this.setBookOrder(data.value);

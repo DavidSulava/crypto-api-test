@@ -1,7 +1,7 @@
 <script setup>
-import ColorPrice from "@/components/ColorNumber.vue";
+  import ColorPrice from '@/components/ColorNumber.vue';
 
-  const props = defineProps({
+  defineProps({
     priceData: {
       type: Object,
     },

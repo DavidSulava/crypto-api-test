@@ -1,10 +1,10 @@
 <script setup>
   import '@/styles/pages/book-order.less';
   import {onMounted, onUnmounted, ref, watch} from "vue";
-  import {useCurrencyPairStore} from "@/stores/currencyPair/index.js";
-  import {useBookOrderStore} from "@/stores/bookOrder/index.js";
-  import BookTable from "@/pages/BookOrderPage/BookTable/index.vue";
-  import useBinanceWS from "@/composables/useBinanceWS.js";
+  import {useCurrencyPairStore} from '@/stores/currencyPair/index.js';
+  import {useBookOrderStore} from '@/stores/bookOrder/index.js';
+  import BookTable from '@/pages/BookOrderPage/BookTable/index.vue';
+  import useBinanceWS from '@/composables/useBinanceWS.js';
 
   const bookOrderStore = useBookOrderStore();
 

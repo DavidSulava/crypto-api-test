@@ -1,5 +1,5 @@
 <script setup>
-  import ColorPrice from "@/components/ColorNumber.vue";
+  import ColorPrice from '@/components/ColorNumber.vue';
 
   defineProps({
     items: Array,
@@ -23,9 +23,9 @@
       :itemsPerPageOptions="tableOptions.limitList"
   >
     <template #header.total="{column}">
-          <span class="hide-on-mobile">
-            {{ column.title }}
-          </span>
+        <span class="hide-on-mobile">
+          {{ column.title }}
+        </span>
     </template>
     <template #item="{ item }">
       <tr>

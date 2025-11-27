@@ -1,6 +1,7 @@
-import {defineStore} from "pinia";
-import {useFetch} from "@vueuse/core";
-import {SELECTED_PROPS} from "@/pages/SettingsPage/CurrencyPair/constants.js";
+import {defineStore} from 'pinia';
+import {useFetch} from '@vueuse/core';
+import {SELECTED_PROPS} from '@/pages/SettingsPage/CurrencyPair/constants.js';
+import {BINANCE_API_URL} from '@/constants/api.js';
 
 export const useCurrencyPairStore = defineStore('currencyPair', {
     state: () => ({
@@ -22,7 +23,7 @@ export const useCurrencyPairStore = defineStore('currencyPair', {
         async getPair(value) {
             try {
                 this.isDataFetching = true;
-                const url = `https://api.binance.com/api/v3/ticker/price?symbol=${value}`
+                const url = `${BINANCE_API_URL}/ticker/price?symbol=${value}`
 
                 const {data } = await useFetch(url).get().json();
 

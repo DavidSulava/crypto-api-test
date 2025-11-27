@@ -1,10 +1,10 @@
 <script setup>
-  import {computed, onMounted, ref, watch} from "vue";
-  import {useCurrencyPairStore} from "@/stores/currencyPair/index.js";
-  import CurrencyPairHistory from "@/pages/SettingsPage/CurrencyPairHistory/index.vue";
-  import CurrencyPrice from "@/pages/SettingsPage/CurrencyPrice/index.vue";
-  import {SELECTED_PROPS} from "@/pages/SettingsPage/CurrencyPair/constants.js";
-  import useBinanceWS from "@/composables/useBinanceWS.js";
+  import {computed, onMounted, ref, watch} from 'vue';
+  import {useCurrencyPairStore} from '@/stores/currencyPair/index.js';
+  import CurrencyPairHistory from '@/pages/SettingsPage/CurrencyPairHistory/index.vue';
+  import CurrencyPrice from '@/pages/SettingsPage/CurrencyPrice/index.vue';
+  import {SELECTED_PROPS} from '@/pages/SettingsPage/CurrencyPair/constants.js';
+  import useBinanceWS from '@/composables/useBinanceWS.js';
 
   const currencyPairStore = useCurrencyPairStore();
 
@@ -12,9 +12,6 @@
   const selectedPairValue = computed(() => currencyPairStore.selectedPair.value);
   const { data } = useBinanceWS(selectedPairValue);
 
-  onMounted(() => {
-    currencyPairStore.getPair(currencyPairStore.selectedPair.value);
-  });
   watch(data, () => {
     if (data.value?.length) {
       setPrice(data.value);
@@ -39,6 +36,10 @@
 
     currencyPairStore.getPair(value);
   }
+
+  onMounted(() => {
+    currencyPairStore.getPair(currencyPairStore.selectedPair.value);
+  });
 </script>
 
 <template>

@@ -3,9 +3,9 @@ import './styles/main.less';
 import 'vuetify/styles';
 import '@mdi/font/css/materialdesignicons.css';
 import App from './App.vue';
-import {pinia} from "./stores/index.js";
-import router from "./routes/index.js";
-import {createVuetify} from "vuetify";
+import {pinia} from './stores/index.js';
+import router from './routes/index.js';
+import {createVuetify} from 'vuetify';
 
 const vuetify = createVuetify({
     defaultTheme: 'dark',

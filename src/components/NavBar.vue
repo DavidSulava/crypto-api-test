@@ -19,9 +19,9 @@
         router :to="link.path"
         :exact="true"
     >
-            <span>
-              {{ link.meta?.title || link.name }}
-            </span>
+      <span>
+        {{ link.meta?.title || link.name }}
+      </span>
     </v-btn>
   </v-app-bar>
 </template>

@@ -1,5 +1,5 @@
-import {computed, onUnmounted, watch} from "vue";
-import {useWebSocket} from "@vueuse/core";
+import {computed, onUnmounted, watch} from 'vue';
+import {useWebSocket} from '@vueuse/core';
 
 const useBinanceWS = (selectedValue, query = '@trade') => {
     const connectionUrl = computed(() => `wss://stream.binance.com:9443/ws/${selectedValue.value.toLowerCase()}${query}`);
