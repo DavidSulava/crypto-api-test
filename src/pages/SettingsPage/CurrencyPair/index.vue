@@ -5,12 +5,13 @@
   import CurrencyPrice from '@/pages/SettingsPage/CurrencyPrice/index.vue';
   import {SELECTED_PROPS} from '@/pages/SettingsPage/CurrencyPair/constants.js';
   import useBinanceWS from '@/composables/useBinanceWS.js';
+  import {storeToRefs} from "pinia";
 
   const currencyPairStore = useCurrencyPairStore();
+  const {selectedPair:selectedPairInStore} = storeToRefs(currencyPairStore)
 
   const selectedPair = ref(null);
-  const selectedPairValue = computed(() => currencyPairStore.selectedPair.value);
-  const { data } = useBinanceWS(selectedPairValue);
+  const { data } = useBinanceWS(selectedPairInStore.value);
 
   watch(data, () => {
     if (data.value?.length) {
@@ -50,7 +51,7 @@
         :icon-url="currencyPairStore?.selectedPair?.iconUrl"
     />
     <v-select
-        v-model="currencyPairStore.selectedPair.value"
+        v-model="selectedPairInStore.value"
         label="Select"
         variant="outlined"
         :item-props="true"

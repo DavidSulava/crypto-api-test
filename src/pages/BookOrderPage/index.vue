@@ -42,25 +42,27 @@
   })
 
   function updateQuantity(data) {
+    //https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly
     const result = JSON.parse(data);
 
-    if(//https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly
-        result.u > bookOrderStore.bookOrderList?.lastUpdateId
-        && prev_u.value && result.U ===  prev_u.value + 1
-    ) {
-      result.a.forEach(item => {
-        const quantity = parseFloat(item[1]);
-        if(quantity) {
-          bookOrderStore.updateBookOrder('asks', [parseFloat(item[0]), quantity]);
-        }
-      });
-      result.b.forEach(item => {
-        const quantity = parseInt(item[1]);
-        if(quantity) {
-          bookOrderStore.updateBookOrder('bids', [parseInt(item[0]), quantity]);
-        }
-      });
-    }
+    if (!result.u || !bookOrderStore.bookOrderList?.lastUpdateId) return;
+    if (result.u <= bookOrderStore.bookOrderList.lastUpdateId) return;
+    if (prev_u.value && result.U !== prev_u.value + 1) return;
+
+    // Обновление только при прохождении всех проверок
+    result.a.forEach(item => {
+      const quantity = parseFloat(item[1]);
+      if (quantity) {
+        bookOrderStore.updateBookOrder('asks', [parseFloat(item[0]), quantity]);
+      }
+    });
+
+    result.b.forEach(item => {
+      const quantity = parseInt(item[1]);
+      if (quantity) {
+        bookOrderStore.updateBookOrder('bids', [parseInt(item[0]), quantity]);
+      }
+    });
     eventCount.value++;
     prev_u.value = result.u;
   }
