@@ -4,7 +4,7 @@ import {
     createWebHistory,
 } from 'vue-router';
 
-const SettingPade = () => import('@/pages/SettingsPage/index.vue');
+const SettingsPage = () => import('@/pages/SettingsPage/index.vue');
 const BookOrderPage = () => import('@/pages/BookOrderPage/index.vue');
 const NotFoundPage = () => import('@/pages/NotFoundPage/index.vue');
 
@@ -22,7 +22,7 @@ const routes = [
     {
         path: '/settings',
         name: 'Settings',
-        component: SettingPade,
+        component: SettingsPage,
         meta: {
             title: 'Settings',
             isAuthRequired: false,
