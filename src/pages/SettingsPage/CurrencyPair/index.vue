@@ -31,7 +31,7 @@
     const data = structuredClone(SELECTED_PROPS.find(item => item.value === value));
     currencyPairStore.setSelectPair(data);
     selectedPair.value = {
-      title: event.target.innerText,
+      title: data.title,
       value: value,
     };
 
