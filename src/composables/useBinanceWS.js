@@ -15,7 +15,7 @@ const useBinanceWS = (selectedValue, query = '@trade') => {
     );
 
     onUnmounted(() => {
-        if(close) close();
+        if(status.value === 'OPEN') close();
     })
     watch(connectionUrl, () => {
         if(open && close) {
